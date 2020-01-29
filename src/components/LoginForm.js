@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { register } from '../state/actions';
+import { register, login } from '../state/actions';
 import {
   FormControl,
   FormLabel,
@@ -49,6 +49,16 @@ const LoginForm = props => {
     });
   };
 
+  const handleLoginSubmit = e => {
+    e.preventDefault();
+    props.login(user);
+    // props.history.push("/");
+    setUser({
+      username: '',
+      password: ''
+    });
+  };
+
   const handleRegisterSubmit = e => {
     e.preventDefault();
     props.register(newUser);
@@ -68,7 +78,7 @@ const LoginForm = props => {
         <FormLabel htmlFor='password'>Password</FormLabel>
         <Input type='password' id='password' onChange={handleLoginChanges} />
         <Flex justify='space-between'>
-          <Button ml={4} ref={finalRef}>
+          <Button ml={4} ref={finalRef} onClick={handleLoginSubmit}>
             Login
           </Button>
           <Button onClick={onOpen}> Register </Button>
@@ -117,9 +127,8 @@ const LoginForm = props => {
 
 const mapStateToProps = state => {
   return {
-    ...state,
-    username: state.username
+    ...state
   };
 };
 
-export default connect(mapStateToProps, { register })(LoginForm);
+export default connect(mapStateToProps, { register, login })(LoginForm);

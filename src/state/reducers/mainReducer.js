@@ -5,6 +5,8 @@ const initialState = {
   data: [],
   username: '',
   fetchingData: false,
+  isLoggedIn: false,
+  log: false,
   error: ''
 };
 
@@ -27,6 +29,30 @@ const mainReducer = (state = initialState, action) => {
 
     case types.REGISTER_FAIL:
       return {
+        error: action.payload
+      };
+
+    case types.LOGIN_START:
+      return {
+        ...state,
+        fetchingData: true
+      };
+
+    case types.LOGIN_SUCCESS:
+      return {
+        ...state,
+        fetchingData: false,
+        log: false,
+        isLoggedIn: true,
+        message: action.message,
+        error: ''
+      };
+
+    case types.LOGIN_FAIL:
+      return {
+        ...state,
+        fetchingData: false,
+        isLoggedIn: false,
         error: action.payload
       };
 
