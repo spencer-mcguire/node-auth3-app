@@ -3,9 +3,9 @@ import axios from 'axios';
 export const axiosWithAuth = () => {
   const token = localStorage.getItem('token');
   return axios.create({
-    baseURL: 'https://weight-lifting-journal-3.herokuapp.com/api',
+    baseURL: 'http://localhost:4000/api',
     headers: {
-      authorization: token,
-    },
+      authorization: token
+    }
   });
 };

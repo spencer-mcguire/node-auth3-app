@@ -3,14 +3,19 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 // Redux
 import { connect } from 'react-redux';
+// styles
+import { ThemeProvider } from '@chakra-ui/core';
+import customTheme from './theme/customTheme';
 import './App.css';
+// components
+import LandingPage from './components/LandingPage';
 
 const App = () => {
   return (
     <Router>
-      <div className="App">
-        <h1>WELCOME TO SPENCER'S REDUX STARTER</h1>
-      </div>
+      <ThemeProvider theme={customTheme}>
+        <Route exact path='/' render={props => <LandingPage {...props} />} />
+      </ThemeProvider>
     </Router>
   );
 };
@@ -18,7 +23,7 @@ const App = () => {
 const mapStateToProps = state => {
   console.log('APP STATE', state);
   return {
-    isLoggedIn: state.isLoggedIn,
+    isLoggedIn: state.isLoggedIn
   };
 };
 
